@@ -1,0 +1,5 @@
+Install Spring boot -> Marketplace
+Install Thymeleaf plugin: https://github.com/thymeleaf/thymeleaf-extras-eclipse-plugin
+Install eclipse Indent Guide: http://sschaef.github.io/IndentGuide/update/
+
+Create Thymeleaf HTML template

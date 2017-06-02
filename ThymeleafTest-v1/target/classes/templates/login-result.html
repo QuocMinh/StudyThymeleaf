@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Error</title>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/login.css}"
+	href="../../css/login.css" />
+</head>
+<body>
+	<!-- MENU BAR -->
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Spring Boot</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a th:href="@{/login}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- CONTAINER -->
+    <div class="container">
+    	<div th:switch="${status}">
+    		<h1 th:case="error" class="error">User not found!</h1>
+    		<h1 th:case="success" class="success">OK!</h1>
+    	</div>
+    </div>
+</body>
+</html>
