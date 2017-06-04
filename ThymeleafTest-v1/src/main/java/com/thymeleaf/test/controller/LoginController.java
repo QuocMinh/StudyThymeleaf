@@ -27,18 +27,12 @@ public class LoginController {
 	@PostMapping("/login")
 	public String loginSubmit(@ModelAttribute User user, Model model) {
 		
-		if(!this.username.equalsIgnoreCase(user.getUsername())) {
+		if(!this.username.equalsIgnoreCase(user.getUsername()) || 
+				!this.password.equals(user.getPassword())) {
 			model.addAttribute("status", "error");
 			
 			return "login-result";
 			
-		} else {
-			
-			if(!this.password.equals(user.getPassword())) {
-				model.addAttribute("status", "error");
-				
-				return "login-result";
-			}
 		}
 		
 		model.addAttribute("status", "success");

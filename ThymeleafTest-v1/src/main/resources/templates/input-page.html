@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Input your title</title>
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/main.css}"
+	href="../../css/main.css" />
+</head>
+<body>
+
+	<!-- MENU BAR -->
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Spring Boot</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a th:href="@{/login}">Login</a></li>
+					<li><a th:href="@{/validation}">Validation Form Input</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- CONTAINER -->
+	<div class="container">
+
+		<form th:action="@{/validation}" th:object="${person}" method="post">
+		
+			<table>
+    			<tr>
+    				<td>
+    					<div class="form-group">
+							<label for="name">Input your name: </label>
+							<input type="text" th:field="*{name}" id="name"
+								class="form-control" autofocus="autofocus"/>
+						</div>
+    				</td>
+    				<td>
+    					<p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
+    				</td>
+    			</tr>
+    			<tr>
+    				<td>
+    					<div class="form-group">
+							<label for="age">Input your age: </label>
+							<input type="text" th:field="*{age}" id="age"
+								class="form-control"/>
+						</div>
+    				</td>
+    				<td>
+    					<p class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</p>
+    				</td>
+    			</tr>
+    		</table>
+			
+			<button type="submit" class="btn btn-default">Validate</button>
+			
+		</form>
+
+	</div>
+	
+</body>
+</html>
