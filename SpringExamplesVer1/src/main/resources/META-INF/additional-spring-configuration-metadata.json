@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "date.dob_format",
+  "type": "java.lang.String",
+  "description": "A description for 'date.dob_format'"
+}]}
