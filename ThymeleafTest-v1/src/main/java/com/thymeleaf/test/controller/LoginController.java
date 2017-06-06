@@ -11,7 +11,7 @@ import com.thymeleaf.test.model.User;
 
 @Controller
 public class LoginController {
-	
+
 	@Value("${User.username}")
 	private String username = "";
 	@Value("${User.password}")
@@ -20,24 +20,24 @@ public class LoginController {
 	@GetMapping("/login")
 	public String loginForm(Model model) {
 		model.addAttribute("user", new User());
-		
+
 		return "login";
 	}
-	
+
 	@PostMapping("/login")
 	public String loginSubmit(@ModelAttribute User user, Model model) {
-		
-		if(!this.username.equalsIgnoreCase(user.getUsername()) || 
-				!this.password.equals(user.getPassword())) {
+
+		if (!this.username.equalsIgnoreCase(user.getUsername())
+				|| !this.password.equals(user.getPassword())) {
 			model.addAttribute("status", "error");
-			
+
 			return "login-result";
-			
+
 		}
-		
+
 		model.addAttribute("status", "success");
-		
+
 		return "login-result";
 	}
-	
+
 }
