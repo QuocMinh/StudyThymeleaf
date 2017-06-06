@@ -15,12 +15,12 @@ import com.app.main.service.CustomerServices;
 public class CustomerController {
 	
 	@Autowired
-	private CustomerRepository customerRepo;
+	private CustomerRepository custRepo;
 	
-	CustomerServices services = new CustomerServices();
+	CustomerServices custServs = new CustomerServices();
 	
 	
-	@GetMapping("/")
+	@GetMapping("/customer")
 	public String showForm(Model model) {
 		model.addAttribute("customer", new Customer());
 		
@@ -32,11 +32,11 @@ public class CustomerController {
 		
 		System.out.println(customer.toString());
 		
-		customerRepo.save(customer);
+		custRepo.save(customer);
 		
 		model.addAttribute("customer", new Customer());
 		
-		services.findByLastName();
+		custServs.findByLastName();
 		
 		return "customer-page";
 	}
