@@ -19,7 +19,7 @@ public class Person {
 	@DateTimeFormat(iso=ISO.DATE)
 	private Date dob;
 	@DBRef
-	private Accounts account = new Accounts();
+	private Account account = new Account();
 	
 	public Person() {
 		super();
@@ -34,7 +34,7 @@ public class Person {
 	}
 
 	public Person(String id, String firstName, String lastName, Date dob,
-			Accounts account) {
+			Account account) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -102,11 +102,11 @@ public class Person {
 		return convertDOBToString(this.dob);
 	}
 	
-	public Accounts getAccount() {
+	public Account getAccount() {
 		return account;
 	}
 
-	public void setAccount(Accounts account) {
+	public void setAccount(Account account) {
 		this.account = account;
 	}
 	

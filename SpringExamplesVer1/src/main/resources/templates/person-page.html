@@ -9,6 +9,26 @@
 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<!-- Custom CSS -->
 	<link rel="stylesheet" th:href="@{/css/main.css}" href="../../css/main.css" />
+	<!-- Custom Javascript -->
+	<script th:src="@{/js/main.js}" charset="utf-8"></script>
+
+	<!-- Bootstrap Date-Picker Plugin -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<script>
+	$(document).ready(function(){
+		var date_input=$('input[name="birthDate"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		var options={
+			format: 'dd/mm/yyyy',
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		};
+		date_input.datepicker(options);
+	})
+	</script>
+	<!-- Bootstrap Date-Picker Plugin -->
 
 	<title>Register Person</title>
 </head>
@@ -50,7 +70,7 @@
 			input#password.form-control[name="password" th:value="${}"]
 			p.help-block{Ex: }
 			 ... EMMET -->
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
 			<button type="reset" class="btn btn-warning">Clear</button>
 		</form>
     </div>
