@@ -9,6 +9,15 @@
 	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 	<!-- Custom CSS -->
 	<link rel="stylesheet" th:href="@{/css/main.css}" href="../../css/main.css" />
+	<!-- Custom Javascript -->
+	<script th:src="@{/js/main.js}" charset="utf-8"></script>
+
+	<!-- Bootstrap Date-Picker Plugin -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<!-- Bootstrap Date-Picker Plugin -->
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"/>
 
 	<title>Register Person</title>
 </head>
@@ -16,11 +25,11 @@
     <div class="container">
 		<h1>Register Person</h1>
 		<hr/>
-		<form th:action="@{/register-person}" th:method="post">
+		<form th:action="@{/register-person}" th:method="post" role="form" data-toggle="validator">
 			<div class="form-group">
 				<label for="firstName">First name:</label>
 				<input type="text" class="form-control" th:value="${person.firstName}"
-					id="firstName" name="firstName" placeholder="Input your first name."/>
+					id="firstName" name="firstName" placeholder="Input your first name." required="required"/>
 				<p class="help-block">Ex: Chau</p>
 			</div>
 			<div class="form-group">
@@ -50,7 +59,7 @@
 			input#password.form-control[name="password" th:value="${}"]
 			p.help-block{Ex: }
 			 ... EMMET -->
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
 			<button type="reset" class="btn btn-warning">Clear</button>
 		</form>
     </div>

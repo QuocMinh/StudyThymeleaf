@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.app.main.model.Accounts;
+import com.app.main.model.Account;
 import com.app.main.model.Person;
 import com.app.main.repository.AccountRepository;
 import com.app.main.repository.PersonRepository;
@@ -26,20 +26,17 @@ public class PersonController {
 	@GetMapping("/")
 	public String showForm(Model model) {
 		model.addAttribute("person", new Person());
-		model.addAttribute("account", new Accounts());
+		model.addAttribute("account", new Account());
 		
 		return "person-page";
 	}
 	
 	@PostMapping("/register-person")
 	public String handleForm(Model model, @ModelAttribute Person person,
-			@ModelAttribute Accounts account, HttpServletRequest request) {
+			@ModelAttribute Account account, HttpServletRequest request) {
 		
 		// Set dob for person by birthDate String
 		person.setDobString(request.getParameter("birthDate"));
-		
-		System.out.println(account.getUsername());
-		System.out.println(account.getPassword());
 		
 		// Save account if not exist
 		boolean accountIsSaved = saveAccount(account);
@@ -55,7 +52,7 @@ public class PersonController {
 		}
 		
 		model.addAttribute("person", new Person());
-		model.addAttribute("account", new Accounts());
+		model.addAttribute("account", new Account());
 		
 		return "redirect:/";
 	}
@@ -81,9 +78,9 @@ public class PersonController {
 	 * 		FALSE	: If account already exists <br>
 	 * 		TRUE	: If save account successfully
 	 */
-	public boolean saveAccount(Accounts account) {
+	public boolean saveAccount(Account account) {
 		// Get account by username:
-		Accounts acc = accRepo.findAccountByUsername(account.getUsername());
+		Account acc = accRepo.findAccountByUsername(account.getUsername());
 		boolean accountExisted = false;
 		
 		try {

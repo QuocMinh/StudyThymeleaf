@@ -2,10 +2,8 @@ package com.app.main.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="accounts")
-public class Accounts {
+public class Account {
 	
 	@Id
 	private String id;
@@ -15,11 +13,11 @@ public class Accounts {
 	private String password;
 	private String role; // {admin, user}
 	
-	public Accounts() {
+	public Account() {
 		super();
 	}
 
-	public Accounts(String id, String username, String password, String role) {
+	public Account(String id, String username, String password, String role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -27,7 +25,7 @@ public class Accounts {
 		this.role = role;
 	}
 
-	public Accounts(String username, String password, String role) {
+	public Account(String username, String password, String role) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -40,7 +38,7 @@ public class Accounts {
 	 * @param username
 	 * @param password
 	 */
-	public Accounts(String username, String password) {
+	public Account(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -52,7 +50,7 @@ public class Accounts {
 	 * 
 	 * @param username
 	 */
-	public Accounts(String username) {
+	public Account(String username) {
 		super();
 		this.username = username;
 		
