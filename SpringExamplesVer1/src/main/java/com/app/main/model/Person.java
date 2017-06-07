@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -17,10 +18,29 @@ public class Person {
 	private String lastName;
 	@DateTimeFormat(iso=ISO.DATE)
 	private Date dob;
-	private Accounts account;
+	@DBRef
+	private Accounts account = new Accounts();
 	
 	public Person() {
 		super();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			this.dob = formatter.parse("01/01/2001");
+		} catch (ParseException e) {
+			e.printStackTrace();
+			this.dob = new Date();
+		}
+	}
+
+	public Person(String id, String firstName, String lastName, Date dob,
+			Accounts account) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.account = account;
 	}
 
 	public Person(String id, String firstName, String lastName, Date dob) {
@@ -88,6 +108,18 @@ public class Person {
 
 	public void setAccount(Accounts account) {
 		this.account = account;
+	}
+	
+	public void setDobString(String dob) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			this.dob = formatter.parse(dob);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			
+			this.dob = null;
+		}
 	}
 
 	public Date convertStringToDOB(String source) {

@@ -10,7 +10,7 @@ public interface AccountRepository extends MongoRepository<Accounts, String> {
 	// Custom method ...
 	
 	@Query("{username : ?0}")
-	public Accounts findUserByUsername(String username);
+	public Accounts findAccountByUsername(String username);
 	
 	// ... Custom method
 	

@@ -1,5 +1,27 @@
-{"properties": [{
-  "name": "date.dob_format",
-  "type": "java.lang.String",
-  "description": "A description for 'date.dob_format'"
-}]}
+{"properties": [
+  {
+    "name": "date.dob_format",
+    "type": "java.lang.String",
+    "description": "A description for 'date.dob_format'"
+  },
+  {
+    "name": "person.register.error",
+    "type": "java.lang.String",
+    "description": "A description for 'person.register.error'"
+  },
+  {
+    "name": "person.register.success",
+    "type": "java.lang.String",
+    "description": "A description for 'person.register.success'"
+  },
+  {
+    "name": "account.register.error.already_exists",
+    "type": "java.lang.String",
+    "description": "A description for 'account.register.error.already_exists'"
+  },
+  {
+    "name": "account.register.success",
+    "type": "java.lang.String",
+    "description": "A description for 'account.register.success'"
+  }
+]}
