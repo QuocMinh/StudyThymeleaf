@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!-- JQuery -->
+	<script src="/webjars/jquery/1.11.1/jquery.min.js" charset="utf-8"></script>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<!-- Custom CSS -->
+	<link rel="stylesheet" th:href="@{/css/main.css}" href="../../css/main.css" />
+
+	<title>Register Person</title>
+</head>
+<body>
+    <div class="container">
+		<h1>Register Person</h1>
+		<hr/>
+		<form th:action="@{/register-person}" th:method="post">
+			<div class="form-group">
+				<label for="firstName">First name:</label>
+				<input type="text" class="form-control" th:value="${customer.firstName}"
+					id="firstName" name="firstName" placeholder="Input your first name."/>
+				<p class="help-block">Ex: Chau</p>
+			</div>
+			<div class="form-group">
+				<label for="lastName">Last name:</label>
+				<input type="text" class="form-control" th:value="${customer.lastName}"
+					id="lastName" name="lastName" placeholder="Input your last name."/>
+				<p class="help-block">Ex: Quoc Minh</p>
+			</div>
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" id="username" class="form-control" name="username" th:value="${account.username}"/>
+				<p class="help-block">Ex: quocminh.chau</p>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="text" id="password" class="form-control" name="password" th:value="${account.password}"/>
+				<p class="help-block">Not: Password must more than 8 characters</p>
+			</div>
+			<!-- EMMET ...
+			div.form-group
+			label[for="password"]{Password}
+			input#password.form-control[name="password" th:value="${}"]
+			p.help-block{Ex: }
+			 ... EMMET -->
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="button" class="btn btn-warning">Clear</button>
+		</form>
+    </div>
+</body>
+</html>
