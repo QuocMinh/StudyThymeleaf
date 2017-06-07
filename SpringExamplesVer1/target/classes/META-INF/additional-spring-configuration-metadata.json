@@ -23,5 +23,15 @@
     "name": "account.register.success",
     "type": "java.lang.String",
     "description": "A description for 'account.register.success'"
+  },
+  {
+    "name": "pattern.email",
+    "type": "java.lang.String",
+    "description": "A description for 'pattern.email'"
+  },
+  {
+    "name": "pattern.date",
+    "type": "java.lang.String",
+    "description": "A description for 'pattern.date'"
   }
 ]}

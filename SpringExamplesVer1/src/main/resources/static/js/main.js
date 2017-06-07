@@ -3,14 +3,14 @@ function isDate(txtDate)
 {
     var currVal = txtDate;
     if(currVal == '')
-    return false;
+    	return false;
 
     //Declare Regex
     var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
     var dtArray = currVal.match(rxDatePattern); // is format OK?
 
     if (dtArray == null)
-    return false;
+    	return false;
 
     //Checks for dd/mm/yyyy format.
     dtDay = dtArray[1];
@@ -35,12 +35,28 @@ function isDate(txtDate)
 // Check valid date when click submit
 $(function() {
     $('#btnSubmit').bind('click', function(){
+    	$('#personForm').validator();
         var txtVal =  $('#birthDate').val();
         if(isDate(txtVal))
-            alert('Valid Date');
+            // alert('Valid Date');
             // Do something ....
+        	return true;
         else
-            alert('Invalid Date');
+            // alert('Invalid Date');
             // Do something ....
+        	return false;
     });
 });
+
+// Date input
+$(document).ready(function(){
+	var date_input=$('input[name="birthDate"]'); //our date input has the name "date"
+	var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+	var options={
+		format: 'dd/mm/yyyy',
+		container: container,
+		todayHighlight: true,
+		autoclose: true,
+	};
+	date_input.datepicker(options);
+})
