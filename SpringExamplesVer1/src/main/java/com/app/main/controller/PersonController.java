@@ -58,25 +58,15 @@ public class PersonController {
 	}
 	
 	/**
-	 * Save person if it doesn't existed yet
-	 * 
-	 * @param person
-	 * @return <br>
-	 * 		FALSE	: If person already exists <br>
-	 * 		TRUE	: If save person successfully
-	 */
-	public boolean savePerson(Person person) {
-		
-		return false;
-	}
-	
-	/**
 	 * Save account if it doesn't existed yet
+	 * <br>
 	 * 
-	 * @param account
-	 * @return <br>
-	 * 		FALSE	: If account already exists <br>
-	 * 		TRUE	: If save account successfully
+	 * @param account : Model
+	 * @return
+	 * <ul>
+	 * 	<li>FALSE	: If account already exists</li>
+	 * 	<li>TRUE	: If save account successfully</li>
+	 * </ul>
 	 */
 	public boolean saveAccount(Account account) {
 		// Get account by username:
