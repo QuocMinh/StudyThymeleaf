@@ -8,11 +8,15 @@ public class LoaiMatHang {
 	@Id
 	private String id;
 	
-	@Indexed(unique=true)
+	@Indexed(unique=true, sparse=true)
 	private String maLoai;
 	private String tenLoai;
 	private String moTa;
 	
+	public LoaiMatHang() {
+		super();
+	}
+
 	public LoaiMatHang(String id, String maLoai, String tenLoai, String moTa) {
 		super();
 		this.id = id;

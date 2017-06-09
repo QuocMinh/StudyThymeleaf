@@ -16,6 +16,8 @@ public class MatHang {
 	private String tenMH;
 	private long donGia;
 	private int soLuong;
+	@DBRef
+	private ChiTietMatHang chitiet;
 	
 	public MatHang() {
 		super();
@@ -40,6 +42,18 @@ public class MatHang {
 		this.tenMH = tenMH;
 		this.donGia = donGia;
 		this.soLuong = soLuong;
+	}
+
+	public MatHang(String id, String maMH, LoaiMatHang loaiMH, String tenMH,
+			long donGia, int soLuong, ChiTietMatHang chitiet) {
+		super();
+		this.id = id;
+		this.maMH = maMH;
+		this.loaiMH = loaiMH;
+		this.tenMH = tenMH;
+		this.donGia = donGia;
+		this.soLuong = soLuong;
+		this.chitiet = chitiet;
 	}
 
 	public String getId() {
@@ -88,6 +102,14 @@ public class MatHang {
 
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
+	}
+
+	public ChiTietMatHang getChitiet() {
+		return chitiet;
+	}
+
+	public void setChitiet(ChiTietMatHang chitiet) {
+		this.chitiet = chitiet;
 	}
 	
 }
