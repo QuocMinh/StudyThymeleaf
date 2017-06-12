@@ -35,3 +35,21 @@
     background-color: #efefef;
     cursor: pointer;
 }
+
+.pagination-centered {
+	text-align: center;
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.pointer-disabled {
+	pointer-events: none;
+}
+.pagination {
+	padding: 0;
+	margin: 0;
+}
+
