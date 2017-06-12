@@ -1,108 +1,79 @@
 package com.app.sum.controller;
 
-import java.util.List;
+import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.sum.model.LoaiMatHang;
+import com.app.sum.model.Pager;
 import com.app.sum.repository.LoaiMatHangRepository;
-import com.mongodb.DuplicateKeyException;
 
 @Controller
-@RequestMapping("/loai-mat-hang")
 public class LoaiMatHangController {
+	
+	private static final int BUTTONS_TO_SHOW = 5;
+	private static final int INITIAL_PAGE = 0;
+	private static final int INITIAL_PAGE_SIZE = 5;
+	private static final int[] PAGE_SIZES = { 5, 10, 20 };
 	
 	@Autowired
 	LoaiMatHangRepository loaiMHRepo;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@GetMapping("/list")
-	public String showAll(Model model) {
-		List<LoaiMatHang> loaiMHs = loaiMHRepo.findAll();
+	@GetMapping("/list-product-type")
+	public String showAll(Model model,
+			@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page) {
+		
+		// Evaluate page size. If requested parameter is null, return initial
+		// page size
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		// Evaluate page. If requested parameter is null or less than 0 (to
+		// prevent exception), return initial size. Otherwise, return value of
+		// param. decreased by 1.
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+		
+		Page<LoaiMatHang> loaiMHs = loaiMHRepo.findAllPageable(new PageRequest(evalPage, evalPageSize));
+		Pager pager = new Pager(loaiMHs.getTotalPages(), loaiMHs.getNumber(), BUTTONS_TO_SHOW);
 		
 		model.addAttribute("loaiMHs", loaiMHs);
 		model.addAttribute("loaiMHNew", new LoaiMatHang());
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("pageSizes", PAGE_SIZES);
+		model.addAttribute("pager", pager);
 		
+		loaiMHRepo.printHello(new LoaiMatHang());
 		
-		return "loaimathang-list";
+		return "loaimathang";
 	}
 	
-	@PostMapping("/update")
-	public String handleUpdate(@ModelAttribute LoaiMatHang loaiMH,
-			HttpServletRequest request) {
-		String id = request.getParameter("idLoaiMatHang");
+	@PostMapping("/update-product-type")
+	public String handleUpdate(@ModelAttribute LoaiMatHang loaiMH) {
 		
-		if("".equals(id)) { // Neu id = null -> Save
-			LoaiMatHang loaiMHNew = new LoaiMatHang(
-					loaiMH.getMaLoai(),
-					loaiMH.getTenLoai(),
-					loaiMH.getMoTa());
-			
-			try {
-				loaiMHRepo.save(loaiMHNew);
-			} catch (DuplicateKeyException e) {
-				e.printStackTrace();
-			}
-			
-		} else { // Nguoc lai -> Update
-			 loaiMHRepo.save(loaiMH);
-		}
+		loaiMHRepo.save(loaiMH);
 		
-		return "redirect:/loai-mat-hang/list";
+		return "redirect:/list-product-type";
 	}
 	
 	
-	@GetMapping("/delete")
-	public String handleDelete(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		
-		System.out.println(id);
+	@GetMapping("/delete-product-type")
+	public String handleDelete(@RequestParam String id) {
+		logger.info("Delete --> id = " + id);
 		
 		loaiMHRepo.delete(id);
 		
-		return "redirect:/loai-mat-hang/list";
-	}
-	
-	/**
-	 * Save LoaiMathang if it doesn't existed yet
-	 * <br>
-	 * 
-	 * @param maLoai : Model
-	 * @return
-	 * <ul>
-	 * 	<li>FALSE	: If LoaiMathang already exists</li>
-	 * 	<li>TRUE	: If save LoaiMathang successfully</li>
-	 * </ul>
-	 */
-	public boolean saveLoaiHangHoa(LoaiMatHang maLoai) {
-		// Get account by username:
-		LoaiMatHang acc = loaiMHRepo.findByMaLoai(maLoai.getMaLoai());
-		boolean accountExisted = false;
-		
-		try {
-			// Check account existed
-			accountExisted = loaiMHRepo.exists(acc.getId());
-		} catch (NullPointerException e) {
-			System.out.println("LoaiMathang chua ton tai");
-		}
-		
-		if(accountExisted) {
-			System.out.println("LoaiMathang da ton tai");
-		} else {
-			loaiMHRepo.save(maLoai);
-			System.out.println("LoaiMathang saved");
-			
-			return true;
-		}
-		
-		return false;
+		return "redirect:/list-product-type";
 	}
 	
 }

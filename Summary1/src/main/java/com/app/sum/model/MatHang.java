@@ -1,16 +1,13 @@
 package com.app.sum.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 public class MatHang {
 	
 	@Id
-	private String id;
-	
-	@Indexed(unique=true)
 	private String maMH;
+	
 	@DBRef
 	private LoaiMatHang loaiMH;
 	private String tenMH;
@@ -23,17 +20,6 @@ public class MatHang {
 		super();
 	}
 
-	public MatHang(String id, String maMH, LoaiMatHang loaiMH, String tenMH,
-			long donGia, int soLuong) {
-		super();
-		this.id = id;
-		this.maMH = maMH;
-		this.loaiMH = loaiMH;
-		this.tenMH = tenMH;
-		this.donGia = donGia;
-		this.soLuong = soLuong;
-	}
-
 	public MatHang(String maMH, LoaiMatHang loaiMH, String tenMH, long donGia,
 			int soLuong) {
 		super();
@@ -44,24 +30,15 @@ public class MatHang {
 		this.soLuong = soLuong;
 	}
 
-	public MatHang(String id, String maMH, LoaiMatHang loaiMH, String tenMH,
-			long donGia, int soLuong, ChiTietMatHang chitiet) {
+	public MatHang(String maMH, LoaiMatHang loaiMH, String tenMH, long donGia,
+			int soLuong, ChiTietMatHang chitiet) {
 		super();
-		this.id = id;
 		this.maMH = maMH;
 		this.loaiMH = loaiMH;
 		this.tenMH = tenMH;
 		this.donGia = donGia;
 		this.soLuong = soLuong;
 		this.chitiet = chitiet;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getMaMH() {
