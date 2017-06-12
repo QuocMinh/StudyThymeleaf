@@ -5,25 +5,8 @@
 	display: flex;
 }
 
-.tbl-header {
-	width: 100%;
-}
-
-.tbl-header tr td:first-child {
-	width: 60%;
-}
-
-.btn-control {
-	min-width: 300px;
-}
-
 .required {
 	color: red;
-}
-
-.tbl-scroll {
-	height: 400px;
-	overflow: auto;
 }
 
 #tbl-loaihanghoa thead th {
@@ -52,4 +35,6 @@
 	padding: 0;
 	margin: 0;
 }
-
+#itemId {
+	display: none;
+}
