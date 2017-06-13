@@ -1,10 +1,11 @@
-package com.app.sum.dao;
+package com.app.sum.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import com.app.sum.dao.LoaiMatHangRepositoryCustom;
 import com.app.sum.model.LoaiMatHang;
 import com.app.sum.repository.LoaiMatHangRepository;
 
