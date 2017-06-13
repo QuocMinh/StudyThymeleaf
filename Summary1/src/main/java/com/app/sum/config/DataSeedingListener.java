@@ -39,16 +39,11 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 					Constant.ROLE_MEMBER_DETAIL));
 		}
 		
-		if(roleRepository.findOne(Constant.ROLE_USER) == null) {
-			roleRepository.save(new Role(Constant.ROLE_USER,
-					Constant.ROLE_USER_DETAIL));
-		}
-		
 		// ADMIN ACCOUNT:
 		if(userRepository.findOne("admin") == null) {
 			User admin = new User();
 			admin.setUsername("admin");
-			admin.setPassword("admin");
+			admin.setPassword(passwordEncoder.encode("admin"));
 			List<Role> roles = new ArrayList<Role>();
 			roles.add(roleRepository.findByRoleName(Constant.ROLE_ADMIN));
 			roles.add(roleRepository.findByRoleName(Constant.ROLE_MEMBER));
@@ -61,7 +56,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 		if(userRepository.findOne("member") == null) {
 			User member = new User();
 			member.setUsername("member");
-			member.setPassword("member");
+			member.setPassword(passwordEncoder.encode("member"));
 			List<Role> roles = new ArrayList<Role>();
 			roles.add(roleRepository.findByRoleName(Constant.ROLE_MEMBER));
 			member.setUserRole(roles);

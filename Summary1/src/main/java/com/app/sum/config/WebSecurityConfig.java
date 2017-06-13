@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService);
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 	
 	@Override
@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/regsiter").permitAll()
 				.antMatchers("/").hasRole("MEMBER")
+				.antMatchers("/admin").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
