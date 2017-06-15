@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 
 import com.app.sum.model.Customer;
 import com.app.sum.model.CustomerType;
+import com.app.sum.model.Product;
 import com.app.sum.model.Role;
 import com.app.sum.model.UnitPrice;
 import com.app.sum.model.User;
 import com.app.sum.repository.CustomerRepository;
 import com.app.sum.repository.CustomerTypeRepository;
+import com.app.sum.repository.ProductRepository;
 import com.app.sum.repository.RoleRepository;
 import com.app.sum.repository.UnitPriceRepository;
 import com.app.sum.repository.UserRepository;
@@ -41,6 +43,9 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 	
 	@Autowired
 	private UnitPriceRepository unitPriceRepository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
@@ -102,21 +107,35 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 		}
 		
 		// UNIT_PRICE
-		if(unitPriceRepository.findByCustomerTypeId(customerTypeRepository.findByCustomerType("LE")) == null) {
+		CustomerType customerType = customerTypeRepository.findByCustomerType("LE");
+		if(unitPriceRepository.findByCustomerType(customerType.getCustomerTypeId()) == null) {
 			UnitPrice unitPrice = new UnitPrice();
-			unitPrice.setCustomerTypeId(customerTypeRepository.findByCustomerType("LE"));
+			unitPrice.setCustomerType(customerType);
 			unitPrice.setPrice(100000);
 			unitPrice.setDecription("Gia ban le");
 			
 			unitPriceRepository.save(unitPrice);
 		}
-		if(unitPriceRepository.findByCustomerTypeId(customerTypeRepository.findByCustomerType("SI")) == null) {
+		
+		customerType = customerTypeRepository.findByCustomerType("SI");
+		if(unitPriceRepository.findByCustomerType(customerType.getCustomerTypeId()) == null) {
 			UnitPrice unitPrice = new UnitPrice();
-			unitPrice.setCustomerTypeId(customerTypeRepository.findByCustomerType("SI"));
+			unitPrice.setCustomerType(customerType);
 			unitPrice.setPrice(50000);
 			unitPrice.setDecription("Gia ban si");
 			
 			unitPriceRepository.save(unitPrice);
+		}
+		
+		// PRODUCT:
+		if(productRepository.findOne("NHCHSO25") == null) {
+			Product product = new Product();
+			product.setProductId("NHCHSO25");
+			product.setProductName("So sexy 25ml");
+			List<UnitPrice> unitPrices = unitPriceRepository.findAll();
+			product.setUnitPrices(unitPrices);
+			
+			productRepository.save(product);
 		}
 	}
 
