@@ -16,10 +16,6 @@ public class LoaiMatHangRepositoryImpl implements LoaiMatHangRepositoryCustom {
 	@Autowired
 	LoaiMatHangRepository loaiMHRepo;
 	
-//	public LoaiMatHangRepositoryImpl(LoaiMatHangRepository loaiMHRepo) {
-//		this.loaiMHRepo = loaiMHRepo;
-//	}
-
 	@Override
 	public LoaiMatHang printHello(LoaiMatHang loaiMH) {
 		

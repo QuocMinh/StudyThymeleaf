@@ -1,5 +1,7 @@
 package com.app.sum.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,14 +19,15 @@ public class Product {
 	private String describe;
 	
 	@DBRef
-	private UnitPrice unitPrice;
+	private List<UnitPrice> unitPrices;
 	
 	public Product() {
 		super();
 	}
 
 	public Product(String productId, String productName, String category,
-			String unit, float volume, String describe, UnitPrice unitPrice) {
+			String unit, float volume, String describe,
+			List<UnitPrice> unitPrices) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -32,18 +35,18 @@ public class Product {
 		this.unit = unit;
 		this.volume = volume;
 		this.describe = describe;
-		this.unitPrice = unitPrice;
+		this.unitPrices = unitPrices;
 	}
 
 	public Product(String productName, String category, String unit,
-			float volume, String describe, UnitPrice unitPrice) {
+			float volume, String describe, List<UnitPrice> unitPrices) {
 		super();
 		this.productName = productName;
 		this.category = category;
 		this.unit = unit;
 		this.volume = volume;
 		this.describe = describe;
-		this.unitPrice = unitPrice;
+		this.unitPrices = unitPrices;
 	}
 
 	public String getProductId() {
@@ -94,12 +97,12 @@ public class Product {
 		this.describe = describe;
 	}
 
-	public UnitPrice getUnitPrice() {
-		return unitPrice;
+	public List<UnitPrice> getUnitPrices() {
+		return unitPrices;
 	}
 
-	public void setUnitPrice(UnitPrice unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setUnitPrices(List<UnitPrice> unitPrices) {
+		this.unitPrices = unitPrices;
 	}
 
 	@Override
@@ -107,7 +110,7 @@ public class Product {
 		return "Product [productId=" + productId + ", productName="
 				+ productName + ", category=" + category + ", unit=" + unit
 				+ ", volume=" + volume + ", describe=" + describe
-				+ ", unitPrice=" + unitPrice + "]";
+				+ ", unitPrices=" + unitPrices + "]";
 	}
 
 }

@@ -2,16 +2,14 @@ package com.app.sum.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "unitPrices")
 public class UnitPrice {
 	
 	@Id
 	private String uniPriceId;
 	
 	@DBRef
-	private CustomerType customerTypeId;
+	private CustomerType customerType;
 	private long price;
 	private String decription;
 	
@@ -23,14 +21,14 @@ public class UnitPrice {
 			long price, String decription) {
 		super();
 		this.uniPriceId = uniPriceId;
-		this.customerTypeId = customerTypeId;
+		this.customerType = customerTypeId;
 		this.price = price;
 		this.decription = decription;
 	}
 
 	public UnitPrice(CustomerType customerTypeId, long price, String decription) {
 		super();
-		this.customerTypeId = customerTypeId;
+		this.customerType = customerTypeId;
 		this.price = price;
 		this.decription = decription;
 	}
@@ -43,12 +41,12 @@ public class UnitPrice {
 		this.uniPriceId = uniPriceId;
 	}
 
-	public CustomerType getCustomerTypeId() {
-		return customerTypeId;
+	public CustomerType getCustomerType() {
+		return customerType;
 	}
 
-	public void setCustomerTypeId(CustomerType customerTypeId) {
-		this.customerTypeId = customerTypeId;
+	public void setCustomerType(CustomerType customerType) {
+		this.customerType = customerType;
 	}
 
 	public long getPrice() {
@@ -70,7 +68,7 @@ public class UnitPrice {
 	@Override
 	public String toString() {
 		return "UnitPrice [uniPriceId=" + uniPriceId + ", customerTypeId="
-				+ customerTypeId + ", price=" + price + ", decription="
+				+ customerType + ", price=" + price + ", decription="
 				+ decription + "]";
 	}
 	

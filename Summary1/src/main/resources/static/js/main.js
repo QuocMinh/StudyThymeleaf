@@ -2,6 +2,11 @@ $(document).ready(function() {
     setActiveItem();
 });
 
+function setPrice() {
+    var select = $('#unitPriceType').val();
+    $('#price').val(select);
+}
+
 function setActiveItem() {
     var item = $('#itemId').text();
     $(item).addClass('active');
